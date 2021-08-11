@@ -355,29 +355,60 @@
 // // Мы можем реализовать глубокое клонирование, используя рекурсию. Или, чтобы не изобретать велосипед, использовать готовую реализацию — метод _.cloneDeep(obj) из JavaScript-библиотеки lodash.
 
 // МЕТОДЫ ОБЪЕКТА, THIS
-let user = {
-	name: "Джон",
-	age: 30,
-};
+// let user = {
+// 	name: "Джон",
+// 	age: 30,
+// };
 
-user.sayHi = function () {
-	alert("Привет!");
-};
+// user.sayHi = function () {
+// 	alert("Привет!");
+// };
 
-user.sayHi(); // Привет!
+// user.sayHi(); // Привет!
 
-// эти объекты делают одно и то же (одинаковые методы)
+// // эти объекты делают одно и то же (одинаковые методы)
 
-user = {
-	sayHi: function () {
-		alert("Привет");
-	},
-};
+// user = {
+// 	sayHi: function () {
+// 		alert("Привет");
+// 	},
+// };
 
-// сокращённая запись выглядит лучше, не так ли?
-user = {
-	sayHi() {
-		// то же самое, что и "sayHi: function()"
-		alert("Привет");
-	},
-};
+// // сокращённая запись выглядит лучше, не так ли?
+// user = {
+// 	sayHi() {
+// 		// то же самое, что и "sayHi: function()"
+// 		alert("Привет");
+// 	},
+// };
+
+// КОНСТРУКТОРЫ, СОЗДАНИЕ ОБЪЕКТОВ ЧЕРЕЗ NEW
+function User(name) {
+	this.name = name;
+	this.isAdmin = false;
+}
+
+let user = new User("Вася");
+
+alert(user.name); // Вася
+alert(user.isAdmin); // false
+
+//   Создание методов в конструкторе
+function User(name) {
+	this.name = name;
+
+	this.sayHi = function () {
+		alert("Меня зовут: " + this.name);
+	};
+}
+
+let vasya = new User("Вася");
+
+vasya.sayHi(); // Меня зовут: Вася
+
+/*
+  vasya = {
+     name: "Вася",
+     sayHi: function() { ... }
+  }
+  */
