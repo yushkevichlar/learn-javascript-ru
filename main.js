@@ -201,56 +201,155 @@
 // alert(sum(1, 2)); // 3
 
 // Объекты
-let user = new Object(); // синтаксис "конструктор объекта"
-let user = {}; // синтаксис "литерал объекта"
+// let user = new Object(); // синтаксис "конструктор объекта"
+// let user = {}; // синтаксис "литерал объекта"
 
+// let user = {
+// 	name: "John",
+// 	age: 30,
+// };
+// // получаем свойства объекта:
+// alert(user.name); // John
+// alert(user.age); // 30
+// user.isAdmin = true;
+// delete user.age;
+
+// //Объект, объявленный через const, может быть изменён
+// const user = {
+// 	name: "John",
+// };
+
+// user.name = "Pete";
+
+// alert(user.name); // Pete
+
+// //Вычисляемые свойства
+// let fruit = prompt("Какой фрукт купить?", "apple");
+
+// let bag = {
+// 	[fruit]: 5, // имя свойства будет взято из переменной fruit
+// };
+
+// alert(bag.apple); // 5, если fruit="apple"
+
+// //Проверка существования свойства, оператор «in»
+// let user = { name: "John", age: 30 };
+
+// alert("age" in user); // true, user.age существует
+// alert("blabla" in user); // false, user.blabla не существует
+
+// let key = "age";
+// alert(key in user); // true, имя свойства было взято из переменной key
+
+// //Цикл «for…in»
+// let user = {
+// 	name: "John",
+// 	age: 30,
+// 	isAdmin: true,
+// };
+
+// for (let key in user) {
+// 	// ключи
+// 	alert(key); // name, age, isAdmin
+// 	// значения ключей
+// 	alert(user[key]); // John, 30, true
+// }
+
+// КОПИРОВАНИЕ ОБЪЕКТОВ И ССЫЛКИ
+//Переменная хранит не сам объект, а его «адрес в памяти», другими словами «ссылку» на него:
 let user = {
-	name: "John",
+	name: "Иван",
+};
+//Сам объект хранится где-то в памяти. А в переменной user лежит «ссылка» на эту область памяти.
+//Когда переменная объекта копируется – копируется ссылка, сам же объект не дублируется
+let user = { name: "Иван" };
+let admin = user; // копируется ссылка
+
+//Сравнение по ссылке
+//Операторы равенства == и строгого равенства === для объектов работают одинаково.
+let a = {};
+let b = a; // копирование по ссылке
+
+alert(a == b); // true, т.к. обе переменные ссылаются на один и тот же объект
+alert(a === b); // true
+
+//В другом примере два разных объекта не равны, хотя оба пусты:
+let a = {};
+let b = {}; // два независимых объекта
+
+alert(a == b); // false
+
+//Клонирование и объединение объектов, Object.assign
+let user = {
+	name: "Иван",
 	age: 30,
 };
-// получаем свойства объекта:
-alert(user.name); // John
-alert(user.age); // 30
-user.isAdmin = true;
-delete user.age;
 
-//Объект, объявленный через const, может быть изменён
-const user = {
-	name: "John",
-};
+let clone = {}; // новый пустой объект
 
-user.name = "Pete";
-
-alert(user.name); // Pete
-
-//Вычисляемые свойства
-let fruit = prompt("Какой фрукт купить?", "apple");
-
-let bag = {
-	[fruit]: 5, // имя свойства будет взято из переменной fruit
-};
-
-alert(bag.apple); // 5, если fruit="apple"
-
-//Проверка существования свойства, оператор «in»
-let user = { name: "John", age: 30 };
-
-alert("age" in user); // true, user.age существует
-alert("blabla" in user); // false, user.blabla не существует
-
-let key = "age";
-alert(key in user); // true, имя свойства было взято из переменной key
-
-//Цикл «for…in»
-let user = {
-	name: "John",
-	age: 30,
-	isAdmin: true,
-};
-
+// скопируем все свойства user в него
 for (let key in user) {
-	// ключи
-	alert(key); // name, age, isAdmin
-	// значения ключей
-	alert(user[key]); // John, 30, true
+	clone[key] = user[key];
 }
+
+// теперь в переменной clone находится абсолютно независимый клон объекта
+clone.name = "Пётр"; // изменим в нём данные
+
+alert(user.name); // в оригинальном объекте значение свойства `name` осталось прежним – Иван.
+
+//Object.assign
+let user = { name: "Иван" };
+
+let permissions1 = { canView: true };
+let permissions2 = { canEdit: true };
+
+// копируем все свойства из permissions1 и permissions2 в user
+Object.assign(user, permissions1, permissions2);
+
+// теперь user = { name: "Иван", canView: true, canEdit: true }
+//Если принимающий объект (user) уже имеет свойство с таким именем, оно будет перезаписано:
+let user = { name: "Иван" };
+
+Object.assign(user, { name: "Пётр" });
+
+alert(user.name); // теперь user = { name: "Пётр" }
+
+//Мы также можем использовать Object.assign для замены for..in на простое клонирование:
+let user = {
+	name: "Иван",
+	age: 30,
+};
+
+let clone = Object.assign({}, user);
+
+//Вложенное клонирование
+let user = {
+	name: "Иван",
+	sizes: {
+		height: 182,
+		width: 50,
+	},
+};
+
+alert(user.sizes.height); // 182
+
+// Теперь при клонировании недостаточно просто скопировать clone.sizes = user.sizes, поскольку user.sizes – это объект, он будет скопирован по ссылке. А значит объекты clone и user в своих свойствах sizes будут ссылаться на один и тот же объект:
+let user = {
+	name: "Иван",
+	sizes: {
+		height: 182,
+		width: 50,
+	},
+};
+
+let clone = Object.assign({}, user);
+
+alert(user.sizes === clone.sizes); // true, один и тот же объект
+
+// user и clone обращаются к одному sizes
+user.sizes.width++; // меняем свойство в одном объекте
+alert(clone.sizes.width); // 51, видим результат в другом объекте
+
+// Чтобы исправить это, мы должны в цикле клонирования делать проверку, не является ли значение user[key] объектом, и если это так – скопировать и его структуру тоже. Это называется «глубокое клонирование».
+
+// Мы можем реализовать глубокое клонирование, используя рекурсию. Или, чтобы не изобретать велосипед, использовать готовую реализацию — метод _.cloneDeep(obj) из JavaScript-библиотеки lodash.
