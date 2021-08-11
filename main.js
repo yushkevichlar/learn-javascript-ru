@@ -99,18 +99,91 @@
 // }
 
 // SWITCH
-let a = 2 + 2;
+// let a = 2 + 2;
 
-switch (a) {
-	case 3:
-		alert("Маловато");
-		break;
-	case 4:
-		alert("В точку!");
-		break;
-	case 5:
-		alert("Перебор");
-		break;
-	default:
-		alert("Нет таких значений");
+// switch (a) {
+// 	case 3:
+// 		alert("Маловато");
+// 		break;
+// 	case 4:
+// 		alert("В точку!");
+// 		break;
+// 	case 5:
+// 		alert("Перебор");
+// 		break;
+// 	default:
+// 		alert("Нет таких значений");
+// }
+
+//FUNCTION EXPRESSION
+// let sayHi = function() {
+//     alert( "Привет" );
+//   };
+
+// function ask(question, yes, no) {
+//     if (confirm(question)) yes()
+//     else no();
+//   }
+
+//   function showOk() {
+//     alert( "Вы согласны." );
+//   }
+
+//   function showCancel() {
+//     alert( "Вы отменили выполнение." );
+//   }
+
+//   // использование: функции showOk, showCancel передаются в качестве аргументов ask
+//   ask("Вы согласны?", showOk, showCancel);
+
+// Анонимные функции
+//   function ask(question, yes, no) {
+//     if (confirm(question)) yes()
+//     else no();
+//   }
+
+//   ask(
+//     "Вы согласны?",
+//     function() { alert("Вы согласились."); },
+//     function() { alert("Вы отменили выполнение."); }
+//   );
+
+//   let age = 16; // присвоим для примера 16
+
+// if (age < 18) {
+//   welcome();               // \   (выполнится)
+//                            //  |
+//   function welcome() {     //  |
+//     alert("Привет!");      //  |  Function Declaration доступно
+//   }                        //  |  во всём блоке кода, в котором объявлено
+//                            //  |
+//   welcome();               // /   (выполнится)
+
+// } else {
+
+//   function welcome() {
+//     alert("Здравствуйте!");
+//   }
+// }
+
+// // здесь фигурная скобка закрывается,
+// // поэтому Function Declaration, созданные внутри блока кода выше -- недоступны отсюда.
+
+// welcome(); // Ошибка: welcome is not defined
+
+// Что можно сделать, чтобы welcome была видима снаружи if?
+let age = prompt("Сколько Вам лет?", 18);
+
+let welcome;
+
+if (age < 18) {
+	welcome = function () {
+		alert("Привет!");
+	};
+} else {
+	welcome = function () {
+		alert("Здравствуйте!");
+	};
 }
+
+welcome(); // теперь всё в порядке
