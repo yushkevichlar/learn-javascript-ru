@@ -172,18 +172,30 @@
 // welcome(); // Ошибка: welcome is not defined
 
 // Что можно сделать, чтобы welcome была видима снаружи if?
-let age = prompt("Сколько Вам лет?", 18);
+// let age = prompt("Сколько Вам лет?", 18);
 
-let welcome;
+// let welcome;
 
-if (age < 18) {
-	welcome = function () {
-		alert("Привет!");
-	};
-} else {
-	welcome = function () {
-		alert("Здравствуйте!");
-	};
-}
+// if (age < 18) {
+// 	welcome = function () {
+// 		alert("Привет!");
+// 	};
+// } else {
+// 	welcome = function () {
+// 		alert("Здравствуйте!");
+// 	};
+// }
 
-welcome(); // теперь всё в порядке
+// welcome(); // теперь всё в порядке
+
+// ARROW FUNCTIONS BASICS
+let sum = (a, b) => a + b;
+
+/* Более короткая форма для:
+
+let sum = function(a, b) {
+  return a + b;
+};
+*/
+
+alert(sum(1, 2)); // 3
