@@ -189,13 +189,68 @@
 // welcome(); // теперь всё в порядке
 
 // ARROW FUNCTIONS BASICS
-let sum = (a, b) => a + b;
+// let sum = (a, b) => a + b;
 
-/* Более короткая форма для:
+// /* Более короткая форма для:
 
-let sum = function(a, b) {
-  return a + b;
+// let sum = function(a, b) {
+//   return a + b;
+// };
+// */
+
+// alert(sum(1, 2)); // 3
+
+// Объекты
+let user = new Object(); // синтаксис "конструктор объекта"
+let user = {}; // синтаксис "литерал объекта"
+
+let user = {
+	name: "John",
+	age: 30,
 };
-*/
+// получаем свойства объекта:
+alert(user.name); // John
+alert(user.age); // 30
+user.isAdmin = true;
+delete user.age;
 
-alert(sum(1, 2)); // 3
+//Объект, объявленный через const, может быть изменён
+const user = {
+	name: "John",
+};
+
+user.name = "Pete";
+
+alert(user.name); // Pete
+
+//Вычисляемые свойства
+let fruit = prompt("Какой фрукт купить?", "apple");
+
+let bag = {
+	[fruit]: 5, // имя свойства будет взято из переменной fruit
+};
+
+alert(bag.apple); // 5, если fruit="apple"
+
+//Проверка существования свойства, оператор «in»
+let user = { name: "John", age: 30 };
+
+alert("age" in user); // true, user.age существует
+alert("blabla" in user); // false, user.blabla не существует
+
+let key = "age";
+alert(key in user); // true, имя свойства было взято из переменной key
+
+//Цикл «for…in»
+let user = {
+	name: "John",
+	age: 30,
+	isAdmin: true,
+};
+
+for (let key in user) {
+	// ключи
+	alert(key); // name, age, isAdmin
+	// значения ключей
+	alert(user[key]); // John, 30, true
+}
