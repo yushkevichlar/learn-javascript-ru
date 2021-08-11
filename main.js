@@ -81,7 +81,7 @@
 // undefined + 1; //NaN
 // " \t \n" - 2; //-2
 
-// While For
+// WHILE FOR
 // let i = 0;
 // while (i < 3) {
 // 	alert(i);
@@ -94,6 +94,23 @@
 // 	i++;
 // } while (i < 3);
 
-for (let i = 0; i < 3; i++) {
-	alert(i);
+// for (let i = 0; i < 3; i++) {
+// 	alert(i);
+// }
+
+// SWITCH
+let a = 2 + 2;
+
+switch (a) {
+	case 3:
+		alert("Маловато");
+		break;
+	case 4:
+		alert("В точку!");
+		break;
+	case 5:
+		alert("Перебор");
+		break;
+	default:
+		alert("Нет таких значений");
 }
